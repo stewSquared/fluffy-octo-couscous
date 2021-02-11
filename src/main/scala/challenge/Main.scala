@@ -1,11 +1,11 @@
 package challenge
 
-def naiveSolution(userFavorites: Seq[Seq[String]]): Seq[(String, String)] = {
+def naiveSolution(userFavorites: Seq[Seq[String]], threshold: Int = 50): Seq[(String, String)] = {
   userFavorites
     .flatMap(artists => artists.sorted.combinations(2))
     .groupBy(identity)
     .toSeq
-    .collect { case (Seq(a, b), occurrences) if occurrences.size >= 50 => (a, b) }
+    .collect { case (Seq(a, b), occurrences) if occurrences.size >= threshold => (a, b) }
     .sorted
 }
 
