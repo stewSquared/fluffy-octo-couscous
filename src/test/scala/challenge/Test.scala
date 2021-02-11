@@ -6,8 +6,8 @@ import org.junit.Assert._
 class Test1 {
   /* Edge cases and properties to test:
    * [X] Order of appearance of pairs in each favorites list
-   * [ ] Order of appearance of favorites lists
-   * [ ] Results are normalized
+   * [X] Order of appearance of favorites lists
+   * [X] Results are normalized
    * [X] Threshold off by one
    * [ ] Duplicates in a favorites list
    * [X] Doubled user list == doubled occurrences
@@ -53,6 +53,16 @@ class Test1 {
     assertEquals(pairs, Seq(("funk1", "funk2")))
   }
 
+  def testRandomized(solution: Solution): Unit = {
+    val random = new util.Random
+
+    val randomizedSamples = random.shuffle((1 to 10).flatMap(_ => sample1.map(random.shuffle)))
+
+    val pairs = solution.run(randomizedSamples, threshold = 20)
+
+    assertEquals(pairs, (Seq(("funk1", "funk2"))))
+  }
+
   @Test def testBasicNaive = testBasic(naiveSolution)
 
   @Test def testBasicOptimized = testBasic(optimizedSolution)
@@ -60,4 +70,8 @@ class Test1 {
   @Test def testDoubledNaive = testDoubled(naiveSolution)
 
   @Test def testDoubledOptimized = testDoubled(optimizedSolution)
+
+  @Test def testRandomizedNaive = testRandomized(naiveSolution)
+
+  @Test def testRandomizedOptimized = testRandomized(optimizedSolution)
 }
