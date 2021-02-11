@@ -10,7 +10,7 @@ class Test1 {
    * [ ] Results are normalized
    * [X] Threshold off by one
    * [ ] Duplicates in a favorites list
-   * [ ] Doubled user list == doubled occurrences
+   * [X] Doubled user list == doubled occurrences
    */
 
   val sample1 = Seq(
@@ -47,11 +47,17 @@ class Test1 {
     )
   }
 
-  @Test def testBasicNaive: Unit = {
-    testBasic(naiveSolution)
+  def testDoubled(solution: Solution): Unit = {
+    val pairs = solution.run(sample1 ++ sample1, threshold = 4)
+
+    assertEquals(pairs, Seq(("funk1", "funk2")))
   }
 
-  @Test def testBasicOptimized: Unit = {
-    testBasic(optimizedSolution)
-  }
+  @Test def testBasicNaive = testBasic(naiveSolution)
+
+  @Test def testBasicOptimized = testBasic(optimizedSolution)
+
+  @Test def testDoubledNaive = testDoubled(naiveSolution)
+
+  @Test def testDoubledOptimized = testDoubled(optimizedSolution)
 }
