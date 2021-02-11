@@ -4,6 +4,15 @@ import org.junit.Test
 import org.junit.Assert._
 
 class Test1 {
+  /* Edge cases and properties to test:
+   * [ ] Order of appearance of pairs in each favorites list
+   * [ ] Order of appearance of favorites lists
+   * [ ] Results are normalized
+   * [ ] Threshold off by one
+   * [ ] Duplicates in a favorites list
+   * [ ] Doubled user list == doubled occurrences
+   */
+
   @Test def testNaive(): Unit = {
     def sample = Seq(
       Seq("funk1", "funk2", "rock"),
